@@ -1,11 +1,11 @@
 Arguments: 
-  /home/nahuel/.nvm/versions/node/v12.10.0/bin/node /home/nahuel/.nvm/versions/node/v12.10.0/bin/yarn add bcrypt.js
+  /home/nahuel/.nvm/versions/node/v12.10.0/bin/node /home/nahuel/.nvm/versions/node/v12.10.0/bin/yarn add ysonwebtoken
 
 PATH: 
-  /home/nahuel/.nvm/versions/node/v12.10.0/bin:/home/nahuel/.rvm/gems/ruby-2.5.1/bin:/home/nahuel/.rvm/gems/ruby-2.5.1@global/bin:/home/nahuel/.rvm/rubies/ruby-2.5.1/bin:/home/nahuel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/nahuel/.rvm/bin:/home/nahuel/.rvm/bin:/home/nahuel/programas/jdk-8u221-linux-x64/jdk1.8.0_221/bin:/home/nahuel/Android/Sdk/emulator
+  /home/nahuel/.nvm/versions/node/v12.10.0/bin:/home/nahuel/.rvm/gems/ruby-2.5.1/bin:/home/nahuel/.rvm/gems/ruby-2.5.1@global/bin:/home/nahuel/.rvm/rubies/ruby-2.5.1/bin:/home/nahuel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/nahuel/.rvm/bin:/home/nahuel/.rvm/bin:/home/nahuel/programas/jdk-8u221-linux-x64/jdk1.8.0_221/bin:/home/nahuel/Android/Sdk/emulator:/home/nahuel/.rvm/bin:/home/nahuel/programas/jdk-8u221-linux-x64/jdk1.8.0_221/bin:/home/nahuel/Android/Sdk/emulator
 
 Yarn version: 
-  1.17.3
+  1.19.0
 
 Node version: 
   12.10.0
@@ -14,13 +14,13 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/bcrypt.js: Not found
-      at Request.params.callback [as _callback] (/home/nahuel/.nvm/versions/node/v12.10.0/lib/node_modules/yarn/lib/cli.js:66830:18)
-      at Request.self.callback (/home/nahuel/.nvm/versions/node/v12.10.0/lib/node_modules/yarn/lib/cli.js:140464:22)
+  Error: https://registry.yarnpkg.com/ysonwebtoken: Not found
+      at Request.params.callback [as _callback] (/home/nahuel/.nvm/versions/node/v12.10.0/lib/node_modules/yarn/lib/cli.js:66918:18)
+      at Request.self.callback (/home/nahuel/.nvm/versions/node/v12.10.0/lib/node_modules/yarn/lib/cli.js:140539:22)
       at Request.emit (events.js:209:13)
-      at Request.<anonymous> (/home/nahuel/.nvm/versions/node/v12.10.0/lib/node_modules/yarn/lib/cli.js:141436:10)
+      at Request.<anonymous> (/home/nahuel/.nvm/versions/node/v12.10.0/lib/node_modules/yarn/lib/cli.js:141511:10)
       at Request.emit (events.js:209:13)
-      at IncomingMessage.<anonymous> (/home/nahuel/.nvm/versions/node/v12.10.0/lib/node_modules/yarn/lib/cli.js:141358:12)
+      at IncomingMessage.<anonymous> (/home/nahuel/.nvm/versions/node/v12.10.0/lib/node_modules/yarn/lib/cli.js:141433:12)
       at Object.onceWrapper (events.js:298:28)
       at IncomingMessage.emit (events.js:214:15)
       at endReadableNT (_stream_readable.js:1178:12)
@@ -42,6 +42,7 @@ npm manifest:
      },
      "dependencies": {
         "apollo-server-express": "^2.9.3",
+        "bcryptjs": "^2.4.3",
         "express": "^4.17.1",
         "graphql": "^14.5.7",
         "pg": "^7.3.0",
@@ -652,6 +653,11 @@ Lockfile:
       isobject "^3.0.1"
       mixin-deep "^1.2.0"
       pascalcase "^0.1.1"
+  
+  bcryptjs@^2.4.3:
+    version "2.4.3"
+    resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
+    integrity sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=
   
   binary-extensions@^1.0.0:
     version "1.13.1"

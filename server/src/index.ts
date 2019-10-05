@@ -1,6 +1,7 @@
 import "dotenv/config";
 import "reflect-metadata";
 import express from 'express';
+import cors from 'cors';
 import cookieParser from 'cookie-parser'
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from "type-graphql";
@@ -14,6 +15,7 @@ import { createAccessToken, createRefreshToken } from "./auth";
   const app = express();
 
   app.use(cookieParser());
+  app.use(cors());
 
   app.get('/', (_req, res) => res.send("hello"));
 

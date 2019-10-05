@@ -15,7 +15,6 @@ class LoginResponse {
 @Resolver()
 export class UserResolver {
   @Query(() => [User])
-  @UseMiddleware(isAuth)
   users() {
     return User.find();
   }

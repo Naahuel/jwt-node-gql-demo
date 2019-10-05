@@ -19,7 +19,6 @@ import { createAccessToken, createRefreshToken } from "./auth";
 
   // Refresh token
   app.post('/refresh_token', async (req, res) => {
-    console.log(req.cookies);
     const token = req.cookies.jid;
     if (!token) {
       return res.send({ok: false, accessToken: null});
@@ -36,6 +35,12 @@ import { createAccessToken, createRefreshToken } from "./auth";
     // token is valid, send access token
     const user = await User.findOne({id: payload.userId})
     if(!user){
+      return res.send({ok: false, accessToken: null});
+    }
+
+    // Check refresh token version
+    console.log(user, payload);
+    if(user.tokenVersion !== payload.tokenVersion) {
       return res.send({ok: false, accessToken: null});
     }
 

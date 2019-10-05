@@ -1,9 +1,10 @@
-import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware } from 'type-graphql';
+import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware, Int } from 'type-graphql';
 import { hash, compare } from 'bcryptjs'
 import { User } from './entity/User';
 import { MyContext } from './MyContext';
 import { createRefreshToken, createAccessToken } from './auth';
 import { isAuth } from './isAuth';
+import { getConnection } from 'typeorm';
 
 @ObjectType()
 class LoginResponse {
@@ -27,7 +28,6 @@ export class UserResolver {
   @Query(() => String)
   @UseMiddleware(isAuth)
   bye(@Ctx() {payload}: MyContext) {
-    console.log(payload)
     return `your user id is: ${payload!.userId}`;
   }
 
@@ -44,11 +44,20 @@ export class UserResolver {
         password: hashedPassword
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return false;
     }
 
     // Worked
+    return true;
+  }
+
+  @Mutation(() => Boolean)
+  async revokeRefreshTokensForUser(
+    @Arg('userId', () => Int) userId: number
+  ) {
+    await getConnection().getRepository(User).increment({id: userId}, "tokenVersion", 1)
+
     return true;
   }
 

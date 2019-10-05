@@ -10,6 +10,7 @@ export const Routes: React.FC = () => {
     <div>
       <header>
         <div>
+          <Link to="/">Home</Link><br />
           <Link to="/register">Register</Link><br />
           <Link to="/login">Login</Link>
         </div>

@@ -15,7 +15,12 @@ import { createAccessToken, createRefreshToken } from "./auth";
   const app = express();
 
   app.use(cookieParser());
-  app.use(cors());
+  app.use(
+    cors({
+      credentials: true,
+      origin: "http://localhost:3000"
+    })
+  );
 
   app.get("/", (_req, res) => res.send("hello"));
 
@@ -62,7 +67,7 @@ import { createAccessToken, createRefreshToken } from "./auth";
     context: ({ req, res }) => ({ req, res })
   });
 
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(4000, () => {
     console.log("express server started");

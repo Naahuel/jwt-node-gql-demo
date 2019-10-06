@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
-interface Props {
-
-}
+interface Props {}
 
 export const Login: React.FC<Props> = () => {
-  return <div>login page</div>
-}
+  return <div>login page</div>;
+};

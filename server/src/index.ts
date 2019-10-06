@@ -1,9 +1,9 @@
 import "dotenv/config";
 import "reflect-metadata";
-import express from 'express';
-import cors from 'cors';
-import cookieParser from 'cookie-parser'
-import { ApolloServer } from 'apollo-server-express';
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./UserResolver";
 import { createConnection } from "typeorm";
@@ -17,13 +17,13 @@ import { createAccessToken, createRefreshToken } from "./auth";
   app.use(cookieParser());
   app.use(cors());
 
-  app.get('/', (_req, res) => res.send("hello"));
+  app.get("/", (_req, res) => res.send("hello"));
 
   // Refresh token
-  app.post('/refresh_token', async (req, res) => {
+  app.post("/refresh_token", async (req, res) => {
     const token = req.cookies.jid;
     if (!token) {
-      return res.send({ok: false, accessToken: null});
+      return res.send({ ok: false, accessToken: null });
     }
 
     let payload: any = null;
@@ -31,30 +31,26 @@ import { createAccessToken, createRefreshToken } from "./auth";
       payload = verify(token, process.env.REFRESH_TOKEN_SECRET!);
     } catch (error) {
       console.error(error);
-      return res.send({ok: false, accessToken: null});
+      return res.send({ ok: false, accessToken: null });
     }
 
     // token is valid, send access token
-    const user = await User.findOne({id: payload.userId})
-    if(!user){
-      return res.send({ok: false, accessToken: null});
+    const user = await User.findOne({ id: payload.userId });
+    if (!user) {
+      return res.send({ ok: false, accessToken: null });
     }
 
     // Check refresh token version
     console.log(user, payload);
-    if(user.tokenVersion !== payload.tokenVersion) {
-      return res.send({ok: false, accessToken: null});
+    if (user.tokenVersion !== payload.tokenVersion) {
+      return res.send({ ok: false, accessToken: null });
     }
 
     // Refresh token
-    res.cookie(
-      'jid',
-      createRefreshToken(user),
-      {
-        httpOnly: true
-      }
-    )
-    return res.send({ok: false, accessToken: createAccessToken(user)});
+    res.cookie("jid", createRefreshToken(user), {
+      httpOnly: true
+    });
+    return res.send({ ok: false, accessToken: createAccessToken(user) });
   });
 
   await createConnection();
@@ -63,13 +59,13 @@ import { createAccessToken, createRefreshToken } from "./auth";
     schema: await buildSchema({
       resolvers: [UserResolver]
     }),
-    context: ({req, res}) => ({req, res})
+    context: ({ req, res }) => ({ req, res })
   });
 
-  apolloServer.applyMiddleware({app});
+  apolloServer.applyMiddleware({ app });
 
-  app.listen(4000, () =>{
-      console.log('express server started')
+  app.listen(4000, () => {
+    console.log("express server started");
   });
 })();
 
